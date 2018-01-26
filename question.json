@@ -1,0 +1,202 @@
+[
+	{
+		"question": "บริษัทที่ถือครองลิขสิทธิ์ BNK48",
+		"type": "str",
+		"choices": {
+			"1": "Rose",
+			"2": "Ram",
+			"3": "AKS",
+			"4": "Workpoint"
+		}
+	},
+	{
+		"question": "บริษัทที่ถือครองลิขสิทธิ์ 48 Group",
+		"type": "str",
+		"choices": {
+			"1": "AKS",
+			"2": "Ram",
+			"3": "Rose",
+			"4": "Workpoint"
+		}
+	},
+	{
+		"question": "วงที่เป็นวงรุ่นพี่ของวง BNK48",
+		"type": "str",
+		"choices": {
+			"1": "AKB48",
+			"2": "BKK48",
+			"3": "BNK46",
+			"4": "AKB46"
+		}
+	},
+	{
+		"question": "BNK ย่อมาจากคำว่าอะไร",
+		"type": "str",
+		"choices": {
+			"1": "Bangkok",
+			"2": "Bangkok48",
+			"3": "ทั้งคู่",
+			"4": "ไม่มีชื่อเต็ม"
+		}
+	},
+	{
+		"question": "48 เป็นคำผวนมาจากคำว่าอะไร",
+		"type": "str",
+		"choices": {
+			"1": "ชิ=4 บะ=8",
+			"2": "ชิ=8 บะ=4",
+			"3": "เลขที่ผู้ก่อตั้งชอบ",
+			"4": "ตั้งไว้ให้เท่ๆ"
+		}
+	},
+	{
+		"question": "กัปตันวงของ BNK48",
+		"type": "str",
+		"choices": {
+			"1": "Cherprang",
+			"2": "Pun",
+			"3": "Jennis",
+			"4": "Noey"
+		}
+	},
+	{
+		"question": "กัปตันทีม BIII",
+		"type": "str",
+		"choices": {
+			"1": "Pun",
+			"2": "Cherprang",
+			"3": "Jennis",
+			"4": "Noey"
+		}
+	},
+	{
+		"question": "ชื่ออีกชื่อของ Digital live Studio",
+		"type": "str",
+		"choices": {
+			"1": "ตู้ปลา",
+			"2": "ตู้กระจก",
+			"3": "Digital live",
+			"4": "Emquartier"
+		}
+	},
+	{
+		"question": "Digital live Studio ตั้งอยู่ที่ใด",
+		"type": "str",
+		"choices": {
+			"1": "Emquartier",
+			"2": "Siam square",
+			"3": "Siam Paragon",
+			"4": "Mall Bangkapi"
+		}
+	},
+	{
+		"question": "เซ็นบัตสึในแต่ล่ะซิงเกิลมีจำนวนเมมเบอร์ทั้งหมดกี่คน",
+		"type": "str",
+		"choices": {
+			"1": "16",
+			"2": "15",
+			"3": "14",
+			"4": "13"
+		}
+	},
+	{
+		"question": "Threater BNK48 ตั้งอยู่ที่ใด",
+		"type": "str",
+		"choices": {
+			"1": "Mall Bangkapi",
+			"2": "Emquartier",
+			"3": "Mall Ngamwongwan",
+			"4": "Siam paragon"
+		}
+	},
+	{
+		"question": "ยอดขายซีดีซิงเกิลแรกมีจำนวนเท่าใดโดยประมาณ",
+		"type": "str",
+		"choices": {
+			"1": "13000",
+			"2": "15000",
+			"3": "30000",
+			"4": "10000"
+		}
+	},
+	{
+		"question": "<img src='/~b5810451110/hw3/images/cherprang-eyes.jpg' id='question-image-eyes'><br>ดวงตานี้เป็นของเมมเบอร์คนไหน",
+		"type": "image",
+		"choices": {
+			"1": "Cherprang",
+			"2": "Pun",
+			"3": "Jennis",
+			"4": "Noey"
+		}
+	},
+	{
+		"question": "วันเกิดของเฌอปราง",
+		"type": "str",
+		"choices": {
+			"1": "2 May",
+			"2": "5 May",
+			"3": "9 Apr",
+			"4": "9 Nov"
+		}
+	},
+	{
+		"question": "ตัวการ์ตูนที่เฌอปรางอยากคอสเพลย์",
+		"type": "str",
+		"choices": {
+			"1": "Luna Freya",
+			"2": "Hatsune Miku",
+			"3": "Kotori Love Live",
+			"4": "Asuna"
+		}
+	},
+	{
+		"question": "ชื่อเฌอปรางมาจากคำว่าอะไร",
+		"type": "str",
+		"choices": {
+			"1": "ต้นมะปราง",
+			"2": "ต้นไม้",
+			"3": "แก้ม",
+			"4": "ไม่มีข้อถูก"
+		}
+	},
+	{
+		"question": "คามิโอชิของเฌอปรางใน 48 Group คือใคร",
+		"type": "str",
+		"choices": {
+			"1": "Sayaka Yamamoto(Sayanee)",
+			"2": "Takahashi Minami(ท่านเตี้ย)",
+			"3": "Yokoyama Yui(ยุยฮัง)",
+			"4": "Atsuko Maeda(อัตจัง)"
+		}
+	},
+	{
+		"question": "เฌอปรางมักพกของอะไรติดตัว",
+		"type": "str",
+		"choices": {
+			"1": "นาฬิกา",
+			"2": "กำไลข้อมือ",
+			"3": "แว่นตา",
+			"4": "ต้มหู"
+		}
+	},
+	{
+		"question": "สัตว์ที่เฌอปรางชอบ",
+		"type": "str",
+		"choices": {
+			"1": "งู",
+			"2": "แมว",
+			"3": "สุนัข",
+			"4": "หนู"
+		}
+	},
+	{
+		"question": "เฌอปรางเป็น center ในเพลงอะไรและซิงเกิลไหน",
+		"type": "str",
+		"choices": {
+			"1": "BNK48, 2",
+			"2": "BNK48, 1",
+			"3": "KFC, 2",
+			"4": "Aitakatta, 1"
+		}
+	}
+]

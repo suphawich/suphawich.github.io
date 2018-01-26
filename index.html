@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>BNK48 Quiz</title>
+
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="style/css/application.css">
+</head>
+<body>
+	<div class="root">
+		<div class="game">
+			<div class="character" id="character"><img id="character-bg" src="/~b5810451110/hw3/images/character-bg.jpg"></div>
+			<div class="question" id="question">BNK48 Quiz Game</div>
+			<div class="choices" id="choices">
+				<button id="choice-10" type="button">10 ข้อ</button>
+				<br>
+				<button id="choice-20" type="button">20 ข้อ</button>
+			</div>
+			<div class="menus" id="menus">Credit Suphawich</div>
+		</div>
+		Root
+	</div>
+	<script src="jquery-3.3.1.min.js" charset="utf-8"></script>
+	<script>
+		var score = 0;
+		var answer = 1;
+		var questions = new Array();
+		var timer = 0;
+		var distance;
+		var icd;
+		var data;
+		var title = "BNK48 Quiz Game";
+
+		$(document).ready(function() {
+			console.log('READY');
+
+			$.ajax({
+				url: 'question.json',
+				method: 'GET',
+				dataType: 'json',
+				success: function(response) {
+					data = response;
+					console.log(response);
+				} 
+			});
+			actionFirst();
+		});
+
+		function textQuestionFirst(maxQuestion, time) {
+			return "Score: "+score+"/"+maxQuestion+"<br>Time: "+time;
+		}
+
+		function codeChoice() {
+			return '<div id="process"><div id="bar"></div></div>'
+					+'<div id="time" align>0:00</div><br>'
+					+'<button id="choice-1" type="button" value="1">1</button><br>'
+					+'<button id="choice-2" type="button" value="2">2</button><br>'
+					+'<button id="choice-3" type="button" value="3">3</button><br>'
+					+'<button id="choice-4" type="button" value="4">4</button>';
+		}
+
+		function codeMenu(number) {
+			return '<button id="menu-return">Return</button>'
+					+'<span id="menu-max-question">'+number+'</span>'
+					+'<span>/</span>'
+					+'<span id="menu-min-question">1</span>';
+		}
+
+		function codeConclude() {
+			return '<button id="choice-tryagain">Try again</button>'
+					+'<button id="choice-exit">Return to menu</button>';
+		}
+
+		function codeMenuFirst() {
+			return 'Credit Suphawich';
+		}
+
+		function codeChoiceFirst() {
+			return '<button id="choice-10" type="button">10 ข้อ</button><br>'
+					+'<button id="choice-20" type="button">20 ข้อ</button>';
+		}
+
+		function actionFirst() {
+			$('#choice-10').click(function() {selectedTypeGame(10);});
+			$('#choice-20').click(function() {selectedTypeGame(20);});
+		}
+
+		function actionChoice() {
+			$('#choice-1').click(function() {selectedAnswer($('#choice-1').val());});
+			$('#choice-2').click(function() {selectedAnswer($('#choice-2').val());});
+			$('#choice-3').click(function() {selectedAnswer($('#choice-3').val());});
+			$('#choice-4').click(function() {selectedAnswer($('#choice-4').val());});
+		}
+
+		function actionMenu() {
+			$('#menu-return').click(function() {exitToMenu();});
+		}
+		
+		/**
+		* When player is selected button 10 or 20.
+		* Create new tag, each tag has id as.
+		*
+		* Button Id in div 'choices' = 'choice-1', 'choice-2', 'choice-3' and 'choice-4'.
+		* Id in div 'menus' = 'menu-return', 'menu-min-score' and 'menu-max-score'.
+		* 
+		*/
+		function selectedTypeGame(number) {
+			//assign false to questions array.
+			for (let i = 0; i < number; i++) {questions[i] = false;}
+
+			$('#character-bg').attr("src", "/~b5810451110/hw3/images/character-bg2.jpg");
+			//set tag in 'choices'
+			$('#choices').html(codeChoice());
+
+			//set tag in 'menus'
+			$('#menus').html(codeMenu(number));
+
+			//display 'question'
+			assignQuestion();
+
+			//action of new choice button
+			actionChoice();
+			actionMenu();
+		}
+
+		/**
+		* Assign question with random from JSON file.
+		*/
+		function assignQuestion() {
+			//random question.
+			let maxQuestion = $('#menu-max-question').text();
+			let number;
+			do {
+				number = Math.floor(Math.random() * maxQuestion);
+			} while (questions[number] == true);
+
+			//get question from JSON with number...
+			let type = data[number].type;
+			let questionStr = data[number].question;
+			if (type == "image") {
+				$('#question').html(questionStr);
+			} else {
+				$('#question').text(questionStr);
+			}
+			
+			let choiceStr = data[number].choices;
+
+			//complete assign question.
+			questions[number] = true;
+
+			//random choices and assign answer.
+			assignChoices(choiceStr);
+		}
+
+		/**
+		* Assign each choice with random number 1 to 4.
+		* And assign new correct answer to answer valiable.
+		*/
+		function assignChoices(str) {
+			let choices = new Array();
+			let maxChoice = 4;
+
+			//random choice
+			let i = 0;
+			while (i < maxChoice) {
+				let number = Math.floor((Math.random() * 4) + 1);
+
+				//duplicate number?
+				//When don't have number in array.
+				//Pushing number to array.
+				if (!hasObjectInArray(number, choices)) {
+					choices.push(number);
+					i++;
+				}
+			}
+
+			//To change value in each button choices.
+			for (let i = 0; i < maxChoice; i++) {
+				let id = 'choice-' + (i + 1);
+				let number = choices[i];
+				$('#' + id).text(str[''+number]);
+				$('#' + id).val(number);
+			}
+
+			//set new value in answer valiable.
+
+			//countDown choice expired.
+			clearInterval(icd);
+			// let now = new Date();
+			// let newMinutes = now.getMinutes() + 1;
+			// dest = new Date(now.getFullYear(), now.getMonth(), now.getDate()
+			// 				,now.getHours(), newMinutes, now.getSeconds(), now.getMilliseconds());
+			distance = 60000;
+			icd = setInterval("countDown()", 1000);
+		}
+
+		/**
+		* When clicked choice answer.
+		* Check answer.
+		* To change choices.
+		* Checking, Is number of question full?
+		* When number of question is max then go to concludeScore.
+		*/
+		function selectedAnswer(choiceNumber) {
+			//check answer
+			checkAnswer(choiceNumber);
+
+			/**
+			* Pass 'menu-min-question' and overwrite.
+			* Is number of question full(min question is max)?
+			* If not full to change 'menu-min-question' and assign new question and choice.
+			* Else conclude score and try again or end game.
+			*/
+			let minQuestion = $('#menu-min-question').text();
+			let maxQuestion = $('#menu-max-question').text();
+			minQuestion++;
+			if (!isFull(minQuestion, maxQuestion)) {
+				$('#menu-min-question').text(minQuestion);
+
+				//code for change each choice..
+				assignQuestion();
+			} else {
+				concludeScore();
+			}
+		}
+
+		function checkAnswer(choiceNumber) {
+			if (choiceNumber == answer) {
+				score++;
+				$('#menu-score').text(score);
+			}
+		}
+
+		function concludeScore() {
+			let maxQuestion = $('#menu-max-question').text();
+			$('#question').html(textQuestionFirst(maxQuestion, calculateTimer()));
+			$('#choices').html(codeConclude());
+			$('#menus').html(codeMenuFirst());
+
+			reset();
+
+			$('#choice-tryagain').click(function() {tryagain(maxQuestion);});
+			$('#choice-exit').click(function() {exitToMenu();});
+		}
+
+		function calculateTimer() {
+			let min = Math.floor(timer/60);
+			let second = Math.floor(timer - (min*60));
+			let minStr;
+			let secondStr;
+			if (min <= 9) {
+				minStr = "0"+min;
+			} else {
+				minStr = min;
+			}
+
+			if (second <= 9) {
+				secondStr = "0"+second;
+			} else {
+				secondStr = second;
+			}
+			console.log("timer:"+timer);
+			console.log("min:"+min);
+			console.log("second:"+second);
+			return minStr+":"+secondStr;
+		}
+
+		function countDown() {
+			// let now = new Date();
+
+			distance -= 1000;
+			timer += 1;
+			// let distance = dest.getTime() - now.getTime();
+  			// let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  			let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  			if (seconds > 9 && seconds >= 0) {
+  				$('#time').text('0:'+seconds);
+  			} else if (seconds >= 0) {
+  				$('#time').text('0:0'+seconds);
+  			}
+  			let percentBar = (seconds*100)/60;
+  			let elem = $('#bar')[0];
+  			
+  			//creation smooth process bar
+  			//sub interval
+  			let n = 0;
+  			let x = setInterval(function() {
+  				n += 0.01667;
+  				elem.style.width = (percentBar-n)+'%';
+  				if (n >= 1.667) {
+  					clearInterval(x);
+  				}
+  			}, 10);
+
+  			// If the count down is finished, write some text 
+  			if (distance < 0) {
+    			clearInterval(icd);
+    			selectedAnswer();
+  			}
+		}
+
+		function tryagain(maxQuestion) {
+			//new game.
+			selectedTypeGame(maxQuestion);
+		}
+
+		function exitToMenu() {
+			$('#character-bg').attr("src", "/~b5810451110/hw3/images/character-bg.jpg");
+
+			//set tag html to default.
+			$('#question').text(title);
+			$('#choices').html(codeChoiceFirst());
+
+			$('#menus').text(codeMenuFirst());
+
+			//reset valiable.
+			reset();
+
+			//set action of main page.
+			actionFirst();
+		}
+
+		function reset() {
+			score = 0;
+			answer = 1;
+			questions = new Array();
+			var dest;
+			clearInterval(icd);
+		}
+
+		function hasObjectInArray(obj, choices) {
+			for (let j = 0; j < choices.length; j++) {
+				if (obj == choices[j]) {
+					return true;
+				}
+			}
+			return false;
+		}
+
+		function isFull(score, maxScore) {
+			if (score > maxScore) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	</script>
+</body>
+</html>
