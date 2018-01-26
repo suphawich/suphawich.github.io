@@ -120,7 +120,7 @@
 		}
 	},
 	{
-		"question": "<img src='/~b5810451110/hw3/images/cherprang-eyes.jpg' id='question-image-eyes'><br>ดวงตานี้เป็นของเมมเบอร์คนไหน",
+		"question": "<img src='images/cherprang-eyes.jpg' id='question-image-eyes'><br>ดวงตานี้เป็นของเมมเบอร์คนไหน",
 		"type": "image",
 		"choices": {
 			"1": "Cherprang",

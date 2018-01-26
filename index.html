@@ -9,7 +9,7 @@
 <body>
 	<div class="root">
 		<div class="game">
-			<div class="character" id="character"><img id="character-bg" src="/~b5810451110/hw3/images/character-bg.jpg"></div>
+			<div class="character" id="character"><img id="character-bg" src="images/character-bg.jpg"></div>
 			<div class="question" id="question">BNK48 Quiz Game</div>
 			<div class="choices" id="choices">
 				<button id="choice-10" type="button">10 ข้อ</button>
@@ -108,7 +108,7 @@
 			//assign false to questions array.
 			for (let i = 0; i < number; i++) {questions[i] = false;}
 
-			$('#character-bg').attr("src", "/~b5810451110/hw3/images/character-bg2.jpg");
+			$('#character-bg').attr("src", "images/character-bg2.jpg");
 			//set tag in 'choices'
 			$('#choices').html(codeChoice());
 
@@ -306,7 +306,7 @@
 		}
 
 		function exitToMenu() {
-			$('#character-bg').attr("src", "/~b5810451110/hw3/images/character-bg.jpg");
+			$('#character-bg').attr("src", "images/character-bg.jpg");
 
 			//set tag html to default.
 			$('#question').text(title);
